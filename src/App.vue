@@ -16,9 +16,10 @@
       </div>
     </div>
 
-    <app-nav></app-nav>
-
-    <router-view/>
+    <div class="app-main">
+      <app-nav></app-nav>
+      <router-view/>
+    </div>
 
     <div class="footer">
       <div class="">天津茵诺医疗科技有限公司</div>
@@ -86,10 +87,16 @@ export default {
         }
       }
     }
+
     .footer {
       bottom: 0;
       font-size: 0.7em;
       text-align: center;
+    }
+
+    .app-main {
+      width: 1080px;
+      margin: 72px auto 108px;
     }
   }
 </style>

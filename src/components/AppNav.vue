@@ -1,8 +1,19 @@
  <template>
   <div class="navigation">
-    <!-- <el-menu :default-active="$route.path" router>
-      <el-menu-item v-for="item in navs" :key="item.path" :index="item.path"></el-menu-item>
-    </el-menu> -->
+    <el-menu
+      :default-active="$route.path"
+      :router="true"
+      mode="horizontal"
+      background-color="#31758d"
+      text-color="#fff"
+      active-text-color="#ffd04b">
+      <el-menu-item v-for="item in navs"
+        v-if="~item.meta.auth.indexOf(identity.role)"
+        :key="item.path"
+        :index="item.path">
+        {{item.meta.title}}
+      </el-menu-item>
+    </el-menu>
   </div>
 </template>
 
@@ -10,7 +21,16 @@
 import navs from '@/router/map';
 
 export default {
-  props: {},
+  props: {
+    identity: {
+      type: Object,
+      default() {
+        return {
+          role: 'student',
+        };
+      },
+    },
+  },
 
   data() {
     return {
@@ -22,63 +42,23 @@ export default {
     this.navs = navs;
   },
 
-  methods: {},
+  methods: {
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-  .el-menu {
-    padding-top: 30px;
-    background-color: #fafafa;
-  }
-
-  hr {
-    margin: 10px 0;
-    border-top: 1px solid #eee;
-  }
-
-  .el-menu-item {
-    height: 60px;
-    line-height: 60px;
-    padding-left: 26px !important;
-    padding-right: 0;
-    color: #616865;
-    font-size: 18px;
-
-    &:hover,
-    &:active,
-    &.is-active,
-    &.is-active:hover {
-      background-color: #f4f4f4;
+  .navigation {
+    .el-menu {
+      padding: 0 60px;
+      border-radius: 6px;
+      background-color: #31758d;
     }
 
-    &.is-active,
-    &:active,
-    &.is-active:hover {
-      &::before {
-        display: inline-block;
-        float: left;
-        content: "";
-        width: 4px;
-        height: 100%;
-        margin-left: -26px;
-        background-color: #4285f4;
-      }
-    }
-
-    &:focus {
-      outline: none;
-    }
-
-    &.is-active {
-      color: #4285f4;
-    }
-
-    i.iconfont {
-      vertical-align: middle;
-      margin-right: 12px;
-      font-size: 26px;
-      line-height: 60px;
+    .el-menu-item {
+      height: 48px;
+      line-height: 48px;
+      font-size: 1em;
     }
   }
 </style>

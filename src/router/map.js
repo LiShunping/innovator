@@ -1,6 +1,6 @@
 // import Login from '@/components/Login';
 import StudentList from '@/components/StudentList';
-// import InterActiveTeacher from '@/components/InterActiveTeacher';
+import InterActiveTeacher from '@/components/InterActiveTeacher';
 // import InterActiveStudent from '@/components/InterActiveTeacherStudent';
 // import Home from '@/components/Home';
 // import Profile from '@/components/Profile';
@@ -28,15 +28,15 @@ export default [
       auth: ['teacher'],
     },
   },
-  // {
-  //   path: '/inter_active_teacher',
-  //   name: 'InterActiveTeacher',
-  //   component: InterActiveTeacher,
-  //   meta: {
-  //     title: '师生互动',
-  //     auth: ['teacher']
-  //   }
-  // },
+  {
+    path: '/inter_active_teacher',
+    name: 'InterActiveTeacher',
+    component: InterActiveTeacher,
+    meta: {
+      title: '师生互动',
+      auth: ['teacher'],
+    },
+  },
   // {
   //   path: '/home',
   //   name: 'Home',
