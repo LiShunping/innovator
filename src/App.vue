@@ -17,7 +17,7 @@
     </div>
 
     <div class="app-main">
-      <app-nav></app-nav>
+      <app-nav :identity="identity"></app-nav>
       <router-view/>
     </div>
 
@@ -32,9 +32,22 @@
 <script>
 import '@/assets/core.scss';
 import AppNav from '@/components/AppNav';
+import * as Request from '@/network/request';
 
 export default {
+  data() {
+    return {
+      identity: {
+        role: 'teacher',
+      },
+    };
+  },
+
   name: 'App',
+
+  mounted() {
+    console.log(Request);
+  },
 
   components: {
     AppNav,
