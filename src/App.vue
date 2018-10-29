@@ -32,7 +32,6 @@
 </template>
 
 <script>
-import '@/assets/core.scss';
 import AppNav from '@/components/AppNav';
 import Login from '@/components/Login';
 import * as Request from '@/network/request';

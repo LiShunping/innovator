@@ -4,6 +4,7 @@ body {
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #dcdcdc;
 }
 
 .clearfix {
@@ -16,5 +17,15 @@ body {
     height: 0;
     clear: both;
     visibility: hidden;
+  }
+}
+
+.view-main {
+  .header {
+    padding: 0.8em 0;
+    .title {
+      font-size: 1.5em;
+      color: #31758d;
+    }
   }
 }

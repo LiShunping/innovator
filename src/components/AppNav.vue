@@ -8,7 +8,7 @@
       text-color="#fff"
       active-text-color="#ffd04b">
       <el-menu-item v-for="item in navs"
-        v-if="~item.meta.auth.indexOf(identity.role)"
+        v-if="~item.meta.auth.indexOf(identity.role) && item.name !== 'Login'"
         :key="item.path"
         :index="item.path">
         {{item.meta.title}}

@@ -4,6 +4,7 @@
  */
 import Vue from 'vue';
 import 'element-ui/lib/theme-chalk/index.css';
+import '@/assets/element_ui.scss';
 
 import {
   Menu, MenuItem,
