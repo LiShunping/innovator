@@ -1,6 +1,8 @@
 <template>
   <div id="app" class="app-root">
-    <div class="header clearfix">
+    <login v-if="isLoginPage"></login>
+
+    <div v-if="!isLoginPage" class="header clearfix">
       <div class="left">
         <div class="logo"></div>
         <div class="title">天津茵诺医疗科技有限公司</div>
@@ -16,12 +18,12 @@
       </div>
     </div>
 
-    <div class="app-main">
+    <div v-if="!isLoginPage" class="app-main">
       <app-nav :identity="identity"></app-nav>
       <router-view/>
     </div>
 
-    <div class="footer">
+    <div v-if="!isLoginPage" class="footer">
       <div class="">天津茵诺医疗科技有限公司</div>
       <div class="">版权所有 侵权必究</div>
       <div>Copyright © 2018-2019 Tianjin Innovator Medical</div>
@@ -32,6 +34,7 @@
 <script>
 import '@/assets/core.scss';
 import AppNav from '@/components/AppNav';
+import Login from '@/components/Login';
 import * as Request from '@/network/request';
 
 export default {
@@ -51,6 +54,13 @@ export default {
 
   components: {
     AppNav,
+    Login,
+  },
+
+  computed: {
+    isLoginPage() {
+      return this.$route.path === '/login';
+    },
   },
 };
 </script>

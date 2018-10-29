@@ -1,4 +1,4 @@
-// import Login from '@/components/Login';
+import Login from '@/components/Login';
 import StudentList from '@/components/StudentList';
 import InterActiveTeacher from '@/components/InterActiveTeacher';
 // import InterActiveStudent from '@/components/InterActiveTeacherStudent';
@@ -10,15 +10,15 @@ import InterActiveTeacher from '@/components/InterActiveTeacher';
 // import CourseDetail from '@/components/CourseDetail';
 
 export default [
-  // {
-  //   path: '/login',
-  //   name: 'Login',
-  //   component: Login,
-  //   meta: {
-  //     title: '登录',
-  //     auth: ['teacher', 'student'],
-  //   },
-  // },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+    meta: {
+      title: '登录',
+      auth: ['teacher', 'student'],
+    },
+  },
   {
     path: '/student_list',
     name: 'StudentList',
