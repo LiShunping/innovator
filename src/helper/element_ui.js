@@ -11,7 +11,7 @@ import {
   Tag,
   Table, TableColumn, Pagination,
   Tabs, TabPane,
-  // Dialog, Message, Notification, Popover, Tooltip, Loading,
+  Dialog, Message, Notification, Popover, Tooltip, Loading,
   Form, FormItem,
   Button,
   Input, InputNumber,
@@ -26,7 +26,7 @@ const components = [
   Tag,
   Table, TableColumn, Pagination,
   Tabs, TabPane,
-  // Dialog, Message, Notification, Popover, Tooltip, Loading,
+  Dialog, Message, Notification, Popover, Tooltip, Loading,
   Form, FormItem,
   Button,
   Input, InputNumber,
@@ -39,6 +39,9 @@ const components = [
 components.forEach((item) => {
   Vue.use(item);
 });
+
+export const Msg = Message;
+export const Notif = Notification;
 
 // Vue.prototype.$loading = Loading.service
 // Vue.prototype.$msgbox = MessageBox

@@ -1,2 +1,5 @@
-export { Rss } from './rss';
-export { Rss1 } from './rss';
+import User from './user';
+
+export default {
+  User,
+};

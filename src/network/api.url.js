@@ -1,7 +1,7 @@
-const rss = {
-  test: 'http://yinnuo/login.do',
+const user = {
+  login: '/userapi/front/login',
 };
 
 export default {
-  rss,
+  user,
 };

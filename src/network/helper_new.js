@@ -1,13 +1,8 @@
 /* eslint-disable */
 // axios 文档见: https://www.kancloud.cn/yunye/axios/234845
-import Axios from 'axios'
+import axios from 'axios'
 import { Msg } from '@/helper/element_ui'
 import _ from 'lodash'
-
-const axios = Axios.create({
-  baseURL: 'http://47.104.65.186:8081/',
-  timeout: 1000,
-});
 
 /**
  * 目的在于 将返回的数据 提取出来

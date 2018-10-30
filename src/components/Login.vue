@@ -7,24 +7,26 @@
 
     <div class="main">
       <div class="wrap-content">
-        <div class="title">养老智能培训教育平台</div>
+        <!-- <div class="title">养老智能培训教育平台</div> -->
         <div class="wrap-form">
-          <el-form label-position="right">
-            <el-form-item label="">
-              <el-input placeholder="请输入用户名" v-model="userName">
+          <el-form label-position="right" :rules="rules" :model="params">
+            <el-form-item label="" prop="userName">
+              <el-input placeholder="请输入用户名" v-model="params.userName">
                 <template slot="prepend"><i class="iconfont icon-my"></i></template>
               </el-input>
             </el-form-item>
-            <el-form-item label="">
-              <el-input placeholder="请输入密码" type="password" v-model="password">
+            <el-form-item label="" prop="password">
+              <el-input placeholder="请输入密码" type="password" v-model="params.password">
                 <template slot="prepend"><i class="iconfont icon-command"></i></template>
               </el-input>
             </el-form-item>
-            <el-form-item label="" class="wrap-form-item-verify">
-              <el-input placeholder="请输入验证码" type="password" v-model="verifyCode">
+            <el-form-item label="" class="wrap-form-item-verify" prop="verifyCode">
+              <el-input placeholder="请输入验证码" type="password" v-model="params.verifyCode">
                 <template slot="prepend"><i class="iconfont icon-edit"></i></template>
               </el-input>
-              <div class="verify-code"></div>
+              <div class="verify-code" @click="getVerification">
+                <img :src="verifyCodeSrc">
+              </div>
             </el-form-item>
             <el-form-item label="" class="wrap-form-item-submit">
               <el-button type="primary">登  录</el-button>
@@ -37,26 +39,80 @@
       </div>
     </div>
 
-    <div class="footer">
+    <!-- <div class="footer">
       <div class="sence"></div>
       <div>天津茵诺医疗科技有限公司</div>
       <div>版权所有 侵权必究</div>
       <div>Copyright © 2018-2019 Tianjin Innovator Medical</div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
+import verification from 'verification-code';
+
 export default {
   name: 'Login',
 
   data() {
-    return {
-      userName: '',
-      password: '',
-      verifyCode: '',
-      rememberPassword: '',
+    const verifyCodeDiff = (rule, value, callback) => {
+      if (this.params.verifyCode.toLowerCase() !== this.verifyCodeResult.toLowerCase()) {
+        callback(new Error('验证码不正确'));
+      } else {
+        callback();
+      }
     };
+
+    const rules = {
+      userName: [
+        {
+          required: true,
+          trigger: 'blur',
+          message: '请输入用户名',
+        },
+      ],
+      password: [
+        {
+          required: true,
+          trigger: 'blur',
+          message: '请输入密码',
+        },
+      ],
+      verifyCode: [
+        {
+          required: true,
+          trigger: 'blur',
+          message: '请输入验证码',
+        },
+        {
+          validator: verifyCodeDiff,
+        },
+      ],
+    };
+
+    return {
+      params: {
+        userName: '',
+        password: '',
+        verifyCode: '',
+      },
+      verifyCodeResult: '',
+      verifyCodeSrc: '',
+      rememberPassword: '',
+      rules,
+    };
+  },
+
+  mounted() {
+    this.getVerification();
+  },
+
+  methods: {
+    getVerification() {
+      const ret = verification.create();
+      this.verifyCodeResult = ret.code;
+      this.verifyCodeSrc = ret.dataURL;
+    },
   },
 };
 </script>
@@ -139,6 +195,10 @@ export default {
             border-radius: 4px;
             background-color: #fff;
             box-sizing: border-box;
+            img {
+              width: 100%;
+              height: 100%;
+            }
           }
         }
         .wrap-form-item-submit {

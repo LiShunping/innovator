@@ -5,7 +5,9 @@
     </div>
 
     <ol class="student-list clearfix">
-      <li class="student" v-for="item in students">
+      <li class="student"
+        v-for="item in students"
+        :key="item.id">
         <span class="name">{{item.name}}</span>
         <i class="iconfont icon-mail"></i>
         <span class="emails-num">({{item.emailsNum}})</span>
@@ -26,15 +28,15 @@ export default {
         name: '李顺平',
         emailsNum: 2,
       }, {
-        id: 1,
+        id: 2,
         name: '李顺平',
         emailsNum: 2,
       }, {
-        id: 1,
+        id: 3,
         name: '李顺平',
         emailsNum: 2,
       }, {
-        id: 1,
+        id: 4,
         name: '李顺平',
         emailsNum: 2,
       }],
