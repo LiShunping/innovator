@@ -26,7 +26,7 @@ const components = [
   Tag,
   Table, TableColumn, Pagination,
   Tabs, TabPane,
-  Dialog, Message, Notification, Popover, Tooltip, Loading,
+  Dialog, Popover, Tooltip, Loading,
   Form, FormItem,
   Button,
   Input, InputNumber,

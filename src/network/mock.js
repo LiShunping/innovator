@@ -1,3 +1,3 @@
-import './mock_config'
+import './mock_config';
 
-import './user/mock'
+import './user/mock';

@@ -49,6 +49,7 @@
 </template>
 
 <script>
+/* eslint-disable no-console */
 import verification from 'verification-code';
 import Request from '@/network/request';
 
@@ -119,7 +120,12 @@ export default {
     loginIn() {
       this.$refs.loginForm.validate(async (valid) => {
         if (valid) {
-          await Request.User.login(this.params);
+          const res = await Request.User.login(this.params);
+          if (res.role === 'teacher') {
+            this.$router.replace('/student_list');
+          } else {
+            this.$router.replace('/home');
+          }
         }
       });
     },

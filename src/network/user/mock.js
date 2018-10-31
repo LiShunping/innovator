@@ -1,12 +1,13 @@
 import Mock from 'mockjs';
-import * as API from '@/network/api.url';
+import API from '@/network/api.url';
 
 Mock.mock(RegExp(API.user.login), {
-  retCode: 200,
-  retDesc: 'ok',
-  ret: {
+  code: 200,
+  message: 'ok',
+  data: {
     name: '李顺平',
     id: 1221,
     msgNum: 2,
+    role: 'teacher',
   },
-})
+});
