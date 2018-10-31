@@ -7,9 +7,9 @@
 
     <div class="main">
       <div class="wrap-content">
-        <!-- <div class="title">养老智能培训教育平台</div> -->
+        <div class="title">养老智能培训教育平台</div>
         <div class="wrap-form">
-          <el-form label-position="right" :rules="rules" :model="params">
+          <el-form ref="loginForm" label-position="right" :rules="rules" :model="params">
             <el-form-item label="" prop="userName">
               <el-input placeholder="请输入用户名" v-model="params.userName">
                 <template slot="prepend"><i class="iconfont icon-my"></i></template>
@@ -21,7 +21,7 @@
               </el-input>
             </el-form-item>
             <el-form-item label="" class="wrap-form-item-verify" prop="verifyCode">
-              <el-input placeholder="请输入验证码" type="password" v-model="params.verifyCode">
+              <el-input placeholder="请输入验证码" v-model="verifyCodeInput">
                 <template slot="prepend"><i class="iconfont icon-edit"></i></template>
               </el-input>
               <div class="verify-code" @click="getVerification">
@@ -29,7 +29,7 @@
               </div>
             </el-form-item>
             <el-form-item label="" class="wrap-form-item-submit">
-              <el-button type="primary">登  录</el-button>
+              <el-button type="primary" @click="loginIn">登  录</el-button>
             </el-form-item>
             <el-form-item label="">
               <el-checkbox v-model="rememberPassword">记住密码</el-checkbox>
@@ -39,24 +39,30 @@
       </div>
     </div>
 
-    <!-- <div class="footer">
+    <div class="footer">
       <div class="sence"></div>
       <div>天津茵诺医疗科技有限公司</div>
       <div>版权所有 侵权必究</div>
       <div>Copyright © 2018-2019 Tianjin Innovator Medical</div>
-    </div> -->
+    </div>
   </div>
 </template>
 
 <script>
 import verification from 'verification-code';
+import Request from '@/network/request';
 
 export default {
   name: 'Login',
 
   data() {
     const verifyCodeDiff = (rule, value, callback) => {
-      if (this.params.verifyCode.toLowerCase() !== this.verifyCodeResult.toLowerCase()) {
+      const val = this.verifyCodeInput.trim().toLowerCase();
+      if (!val) {
+        callback(new Error('请输入验证码'));
+      } else if (val.length === 4 && val !== this.verifyCodeResult.toLowerCase()) {
+        callback(new Error('验证码不正确'));
+      } else if (val.length < 4 && this.verifyCodeResult.toLowerCase().search(val) === -1) {
         callback(new Error('验证码不正确'));
       } else {
         callback();
@@ -80,12 +86,8 @@ export default {
       ],
       verifyCode: [
         {
-          required: true,
-          trigger: 'blur',
-          message: '请输入验证码',
-        },
-        {
           validator: verifyCodeDiff,
+          trigger: 'change',
         },
       ],
     };
@@ -94,8 +96,8 @@ export default {
       params: {
         userName: '',
         password: '',
-        verifyCode: '',
       },
+      verifyCodeInput: '',
       verifyCodeResult: '',
       verifyCodeSrc: '',
       rememberPassword: '',
@@ -113,6 +115,14 @@ export default {
       this.verifyCodeResult = ret.code;
       this.verifyCodeSrc = ret.dataURL;
     },
+
+    loginIn() {
+      this.$refs.loginForm.validate(async (valid) => {
+        if (valid) {
+          await Request.User.login(this.params);
+        }
+      });
+    },
   },
 };
 </script>
@@ -123,13 +133,13 @@ export default {
   .footer {
     width: 100%;
     color: #000;
-    background: #fff;
   }
   .header {
     font-size: 2.5em;
     height: 1em;
     line-height: 1em;
     padding: 0.5em 0;
+    background-color: #fff;
     .logo,
     .gap,
     .title {

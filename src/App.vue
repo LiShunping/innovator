@@ -34,8 +34,6 @@
 <script>
 import AppNav from '@/components/AppNav';
 import Login from '@/components/Login';
-import Request from '@/network/request';
-import { forData } from '@/network/helper';
 
 export default {
   data() {
@@ -48,8 +46,7 @@ export default {
 
   name: 'App',
 
-  async mounted() {
-    this.identity = await forData(Request.User.my());
+  mounted() {
   },
 
   components: {

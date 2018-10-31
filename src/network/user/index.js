@@ -1,8 +1,9 @@
 import API from '@/network/api.url';
+// import { get } from '@/network/helper_new';
 import { get } from '@/network/helper';
 
-const my = params => get(API.user.login, params);
+const login = params => get(API.user.login, params);
 
 export default {
-  my,
+  login,
 };
